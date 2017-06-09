@@ -1,0 +1,11 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Documents</h1>
+
+<% @documents.each do |document| %>
+    <h2><%= link_to document.title, document %></h2>
+
+    <p class="lead"><%= document.description %></p>
+<% end %>
+
+<p><%= link_to 'New Document', new_document_path, class: 'btn btn-primary' %></p>

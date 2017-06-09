@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Sections</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Document</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @sections.each do |section| %>
+      <tr>
+        <td><%= link_to section.title, section %></td>
+        <td><%= link_to section.document.title, section.document %></td>
+        <td><%= link_to 'Edit', edit_section_path(section) %></td>
+        <td><%= link_to 'Destroy', section, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to 'New Section', new_section_path, class: 'btn btn-primary' %></p>

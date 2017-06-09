@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1><%= @document.title %></h1>
+
+<p class="lead"><%= @document.description %></p>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Section</th>
+      <% @document.variants.each do |variant| %>
+        <th><%= variant.name %></th>
+      <% end %>
+    </tr>
+  </thead>
+  <tbody>
+    <% @document.sections.each do |section| %>
+      <tr>
+        <th><%= section.title %></th>
+        <% @document.variants.each do |variant| %>
+            <td>-</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_document_path(@document) %> |
+<%= link_to 'Back', documents_path %>
