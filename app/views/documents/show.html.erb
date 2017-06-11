@@ -24,8 +24,10 @@
             Edit Content
         <% end %>
     <% else %>
-        <%= link_to new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-default btn-xs' do %>
-          Create Content
+        <% if !@variant.nil? %>
+            <%= link_to new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-default btn-xs' do %>
+              Create Content
+            <% end %>
         <% end %>
     <% end %>
 <% end %>
