@@ -20,6 +20,7 @@ class SectionsController < ApplicationController
 
   # GET /sections/1/edit
   def edit
+    @document = @section.document
   end
 
   # POST /sections
@@ -43,7 +44,7 @@ class SectionsController < ApplicationController
   def update
     respond_to do |format|
       if @section.update(section_params)
-        format.html { redirect_to @section, notice: 'Section was successfully updated.' }
+        format.html { redirect_to document_path(@section.document), notice: 'Section was successfully updated.' }
         format.json { render :show, status: :ok, location: @section }
       else
         format.html { render :edit }

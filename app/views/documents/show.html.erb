@@ -15,9 +15,11 @@
 <% end %>
 
 <% @document.sections.each do |section| %>
-    <h2><%= section.title %></h2>
-    <% content = @document.contents.where(section: section, variant: @variant).first %>
+    <h2><%= section.title %> <small><%= link_to edit_section_path(section) do %>
+          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+    <% end %></small></h2>
 
+    <% content = @document.contents.where(section: section, variant: @variant).first %>
     <% if content %>
         <%= raw @markdown.render(content.try(:body)) %>
         <%= link_to edit_content_path(content), class: 'btn btn-default btn-xs' do %>
