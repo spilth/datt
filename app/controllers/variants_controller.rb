@@ -14,7 +14,8 @@ class VariantsController < ApplicationController
 
   # GET /variants/new
   def new
-    @variant = Variant.new
+    @document = Document.find(params['document'])
+    @variant = Variant.new(document: @document)
   end
 
   # GET /variants/1/edit
@@ -28,7 +29,7 @@ class VariantsController < ApplicationController
 
     respond_to do |format|
       if @variant.save
-        format.html { redirect_to @variant, notice: 'Variant was successfully created.' }
+        format.html { redirect_to document_path(@variant.document), notice: 'Variant was successfully created.' }
         format.json { render :show, status: :created, location: @variant }
       else
         format.html { render :new }

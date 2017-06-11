@@ -12,11 +12,11 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :document_id %>
-    <%= collection_select(:variant, :document_id, Document.all, :id, :title, prompt: true) %>
+    <%= form.hidden_field :document_id %>
+    <%= @document.title %>
   </div>
 
-    <div class="field">
+  <div class="field">
     <%= form.label :name %>
     <%= form.text_field :name, id: :variant_name %>
   </div>
