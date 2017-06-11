@@ -12,8 +12,8 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :document_id %>
-    <%= collection_select(:section, :document_id, Document.all, :id, :title, prompt: true) %>
+    <%= form.hidden_field :document_id %>
+    <%= @document.title %>
   </div>
 
   <div class="field">

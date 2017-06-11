@@ -14,7 +14,8 @@ class SectionsController < ApplicationController
 
   # GET /sections/new
   def new
-    @section = Section.new
+    @document = Document.find(params['document'])
+    @section = Section.new(document: @document)
   end
 
   # GET /sections/1/edit
@@ -28,7 +29,7 @@ class SectionsController < ApplicationController
 
     respond_to do |format|
       if @section.save
-        format.html { redirect_to @section, notice: 'Section was successfully created.' }
+        format.html { redirect_to document_path(@section.document), notice: 'Section was successfully created.' }
         format.json { render :show, status: :created, location: @section }
       else
         format.html { render :new }
