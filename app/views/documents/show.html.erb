@@ -5,7 +5,7 @@
 <p class="lead"><%= @document.description %></p>
 
 <% if !@document.variants.empty? %>
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-pills">
   <% @variants.each do |variant| %>
     <li role="presentation" class="<%= 'active' if variant == @variant %>">
       <%= link_to variant.name, document_path(variant: variant) %>
@@ -38,6 +38,7 @@
 
 <p>
   <%= link_to 'Edit Document', edit_document_path(@document), class: 'btn btn-primary' %>
-  <%= link_to 'Add Section', new_section_path(document: @document), class: 'btn btn-primary' %>
-  <%= link_to 'Add Variant', new_variant_path(document: @document), class: 'btn btn-primary' %>
+  <%= link_to 'Edit Variant', edit_variant_path(@variant), class: 'btn btn-default' %>
+  <%= link_to 'Add Section', new_section_path(document: @document), class: 'btn btn-default' %>
+  <%= link_to 'Add Variant', new_variant_path(document: @document), class: 'btn btn-default' %>
 </p>

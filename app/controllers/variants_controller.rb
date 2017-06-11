@@ -20,6 +20,7 @@ class VariantsController < ApplicationController
 
   # GET /variants/1/edit
   def edit
+    @document = @variant.document
   end
 
   # POST /variants
@@ -43,7 +44,7 @@ class VariantsController < ApplicationController
   def update
     respond_to do |format|
       if @variant.update(variant_params)
-        format.html { redirect_to @variant, notice: 'Variant was successfully updated.' }
+        format.html { redirect_to document_path(@variant.document, variant: @variant), notice: 'Variant was successfully updated.' }
         format.json { render :show, status: :ok, location: @variant }
       else
         format.html { render :edit }
