@@ -16,7 +16,10 @@ class ContentsController < ApplicationController
 
   # GET /contents/new
   def new
-    @content = Content.new
+    @document = Document.find(params['document'])
+    @section = Section.find(params['section'])
+    @variant = Variant.find(params['variant'])
+    @content = Content.new(document: @document, section: @section, variant: @variant)
   end
 
   # GET /contents/1/edit
@@ -30,7 +33,7 @@ class ContentsController < ApplicationController
 
     respond_to do |format|
       if @content.save
-        format.html { redirect_to @content, notice: 'Content was successfully created.' }
+        format.html { redirect_to document_path(@content.document, variant: @content.variant), notice: 'Content was successfully created.' }
         format.json { render :show, status: :created, location: @content }
       else
         format.html { render :new }

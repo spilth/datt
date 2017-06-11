@@ -14,11 +14,13 @@
 
 <% @document.sections.each do |section| %>
     <h2><%= section.title %></h2>
-    <%= raw @markdown.render(@document.contents.where(section: section, variant: @variant).first.try(:body) || "") %>
+    <%= raw @markdown.render(@document.contents.where(section: section, variant: @variant).first.try(:body) || link_to('Create Content', new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-primary')) %>
 <% end %>
 
+<hr>
+
 <p>
-  <%= link_to 'Edit', edit_document_path(@document), class: 'btn btn-primary' %>
+  <%= link_to 'Edit Document', edit_document_path(@document), class: 'btn btn-primary' %>
   <%= link_to 'Add Section', new_section_path(document: @document), class: 'btn btn-primary' %>
   <%= link_to 'Add Variant', new_variant_path(document: @document), class: 'btn btn-primary' %>
 </p>

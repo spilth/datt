@@ -12,26 +12,17 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :document_id %>
-    <%= collection_select(:content, :document_id, Document.all, :id, :title, prompt: true) %>
+    <%= form.hidden_field :document_id %>
+    <%= form.hidden_field :section_id %>
+    <%= form.hidden_field :variant_id %>
+    <%= @document.title %> : <%= @section.title %> : <%= @variant.name %>
   </div>
 
   <div class="field">
-    <%= form.label :section_id %>
-    <%= collection_select(:content, :section_id, Section.all, :id, :title, prompt: true) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :variant_id %>
-    <%= collection_select(:content, :variant_id, Variant.all, :id, :name, prompt: true) %>
-  </div>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_area :body, id: :content_body, class: 'markdown', rows:10, cols: 80 %>
+    <%= form.text_area :body, id: :content_body, class: 'markdown', rows:20, cols: 80 %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
