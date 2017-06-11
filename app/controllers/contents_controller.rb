@@ -24,6 +24,10 @@ class ContentsController < ApplicationController
 
   # GET /contents/1/edit
   def edit
+    @document = @content.document
+    @section = @content.section
+    @variant = @content.variant
+
   end
 
   # POST /contents
@@ -47,7 +51,7 @@ class ContentsController < ApplicationController
   def update
     respond_to do |format|
       if @content.update(content_params)
-        format.html { redirect_to @content, notice: 'Content was successfully updated.' }
+        format.html { redirect_to document_path(@content.document, variant: @content.variant), notice: 'Content was successfully updated.' }
         format.json { render :show, status: :ok, location: @content }
       else
         format.html { render :edit }

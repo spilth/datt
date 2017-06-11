@@ -16,7 +16,18 @@
 
 <% @document.sections.each do |section| %>
     <h2><%= section.title %></h2>
-    <%= raw @markdown.render(@document.contents.where(section: section, variant: @variant).first.try(:body) || link_to('Create Content', new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-default btn-small')) %>
+    <% content = @document.contents.where(section: section, variant: @variant).first %>
+
+    <% if content %>
+        <%= raw @markdown.render(content.try(:body)) %>
+        <%= link_to edit_content_path(content), class: 'btn btn-default btn-xs' do %>
+            Edit Content
+        <% end %>
+    <% else %>
+        <%= link_to new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-default btn-xs' do %>
+          Create Content
+        <% end %>
+    <% end %>
 <% end %>
 
 <hr>
