@@ -11,9 +11,10 @@ class DocumentsController < ApplicationController
   # GET /documents/1.json
   def show
     @contents = @document.contents
+    @variants = @document.variants.order(:name)
 
-    if !@document.variants.empty?
-      @variant = Variant.find(params[:variant] || @document.variants.first.try(:id)) || nil
+    if !@variants.empty?
+      @variant = Variant.find(params[:variant] || @variants.first.try(:id)) || nil
     end
 
     @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)

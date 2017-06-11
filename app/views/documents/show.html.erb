@@ -6,7 +6,7 @@
 
 <% if !@document.variants.empty? %>
   <ul class="nav nav-tabs">
-  <% @document.variants.each do |variant| %>
+  <% @variants.each do |variant| %>
     <li role="presentation" class="<%= 'active' if variant == @variant %>">
       <%= link_to variant.name, document_path(variant: variant) %>
     </li>
