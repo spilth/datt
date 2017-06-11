@@ -10,6 +10,13 @@ class DocumentsController < ApplicationController
   # GET /documents/1
   # GET /documents/1.json
   def show
+    @contents = @document.contents
+
+    if !@document.variants.empty?
+      @variant = Variant.find(params[:variant] || @document.variants.first.try(:id)) || nil
+    end
+
+    @markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true, fenced_code_blocks: true)
   end
 
   # GET /documents/new

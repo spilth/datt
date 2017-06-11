@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Document:</strong>
+  <%= @content.document.title %>
+</p>
+
+<p>
+  <strong>Section:</strong>
+  <%= @content.section.title %>
+</p>
+
+<p>
+  <strong>Variant:</strong>
+  <%= @content.variant.name %>
+</p>
+
+<p><%= raw @body_html %></p>
+
+<%= link_to 'Edit', edit_content_path(@content) %> |
+<%= link_to 'Back', contents_path %>
