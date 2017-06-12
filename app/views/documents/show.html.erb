@@ -54,11 +54,19 @@
 
 <hr>
 
-<p>
-  <%= link_to 'Edit Document', edit_document_path(@document), class: 'btn btn-default btn-xs' %>
-  <% if @variant %>
-    <%= link_to 'Edit Variant', edit_variant_path(@variant), class: 'btn btn-default btn-xs' %>
-  <% end %>
-  <%= link_to 'Add Section', new_section_path(document: @document), class: 'btn btn-default btn-xs' %>
-  <%= link_to 'Add Variant', new_variant_path(document: @document), class: 'btn btn-default btn-xs' %>
-</p>
+<div class="row">
+  <div class="col-md-8">
+    <%= link_to 'Edit Document', edit_document_path(@document), class: 'btn btn-default btn-xs' %>
+    <% if @variant %>
+      <%= link_to 'Edit Variant', edit_variant_path(@variant), class: 'btn btn-default btn-xs' %>
+    <% end %>
+    <%= link_to 'Add Section', new_section_path(document: @document), class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Add Variant', new_variant_path(document: @document), class: 'btn btn-default btn-xs' %>
+  </div>
+  <div class="col-md-4 pull-right">
+    <% if @variant %>
+      <%= link_to 'Delete Variat', @variant, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>
+    <% end %>
+    <%= link_to 'Delete Document', @document, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>
+  </div>
+</div>

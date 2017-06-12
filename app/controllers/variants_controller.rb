@@ -60,9 +60,11 @@ class VariantsController < ApplicationController
   # DELETE /variants/1
   # DELETE /variants/1.json
   def destroy
+    document = @variant.document
+
     @variant.destroy
     respond_to do |format|
-      format.html { redirect_to variants_url, notice: 'Variant was successfully destroyed.' }
+      format.html { redirect_to document_path(document), notice: 'Variant was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

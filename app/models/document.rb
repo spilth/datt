@@ -1,7 +1,7 @@
 class Document < ApplicationRecord
-  has_many :sections
-  has_many :variants
-  has_many :contents
+  has_many :sections, dependent: :destroy
+  has_many :variants, dependent: :destroy
+  has_many :contents, dependent: :destroy
 
   validates :title, presence: true
   validates :description, presence: true

@@ -1,7 +1,8 @@
 class Section < ApplicationRecord
   belongs_to :document
 
-  validates :title, presence: true
+  has_many :contents, dependent: :destroy
 
+  validates :title, presence: true
   validates :document, presence: true
 end
