@@ -33,6 +33,12 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     @document = Document.new(document_params)
+    section = Section.new(title: 'Introduction')
+    variant = Variant.new(name: 'Main')
+    content = Content.new(body: 'Your content here', section: section, variant: variant)
+    @document.sections << section
+    @document.variants << variant
+    @document.contents << content
 
     respond_to do |format|
       if @document.save
