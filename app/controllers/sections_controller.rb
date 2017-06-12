@@ -33,6 +33,8 @@ class SectionsController < ApplicationController
         format.html { redirect_to document_path(@section.document), notice: 'Section was successfully created.' }
         format.json { render :show, status: :created, location: @section }
       else
+        @document = @section.document
+
         format.html { render :new }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end
@@ -47,6 +49,8 @@ class SectionsController < ApplicationController
         format.html { redirect_to document_path(@section.document), notice: 'Section was successfully updated.' }
         format.json { render :show, status: :ok, location: @section }
       else
+        @document = @section.document
+
         format.html { render :edit }
         format.json { render json: @section.errors, status: :unprocessable_entity }
       end

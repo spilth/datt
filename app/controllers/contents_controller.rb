@@ -27,7 +27,6 @@ class ContentsController < ApplicationController
     @document = @content.document
     @section = @content.section
     @variant = @content.variant
-
   end
 
   # POST /contents
@@ -40,6 +39,10 @@ class ContentsController < ApplicationController
         format.html { redirect_to document_path(@content.document, variant: @content.variant), notice: 'Content was successfully created.' }
         format.json { render :show, status: :created, location: @content }
       else
+        @document = @content.document
+        @section = @content.section
+        @variant = @content.variant
+
         format.html { render :new }
         format.json { render json: @content.errors, status: :unprocessable_entity }
       end
@@ -54,6 +57,10 @@ class ContentsController < ApplicationController
         format.html { redirect_to document_path(@content.document, variant: @content.variant), notice: 'Content was successfully updated.' }
         format.json { render :show, status: :ok, location: @content }
       else
+        @document = @content.document
+        @section = @content.section
+        @variant = @content.variant
+
         format.html { render :edit }
         format.json { render json: @content.errors, status: :unprocessable_entity }
       end

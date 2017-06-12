@@ -33,6 +33,8 @@ class VariantsController < ApplicationController
         format.html { redirect_to document_path(@variant.document), notice: 'Variant was successfully created.' }
         format.json { render :show, status: :created, location: @variant }
       else
+        @document = @variant.document
+
         format.html { render :new }
         format.json { render json: @variant.errors, status: :unprocessable_entity }
       end
@@ -47,6 +49,8 @@ class VariantsController < ApplicationController
         format.html { redirect_to document_path(@variant.document, variant: @variant), notice: 'Variant was successfully updated.' }
         format.json { render :show, status: :ok, location: @variant }
       else
+        @document = @variant.document
+
         format.html { render :edit }
         format.json { render json: @variant.errors, status: :unprocessable_entity }
       end
