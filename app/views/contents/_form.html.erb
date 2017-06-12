@@ -19,7 +19,7 @@
   </div>
 
   <div class="field">
-    <%= form.text_area :body, id: :content_body, class: 'markdown', rows:20, cols: 80, spellcheck: false %>
+    <%= form.text_area :body, id: :content_body, rows:20, cols: 80, spellcheck: false %>
   </div>
 
   <div class="actions">
@@ -28,5 +28,8 @@
 <% end %>
 
 <script>
-    var simplemde = new SimpleMDE({ element: document.getElementById("content_body") });
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("content_body"),
+        autofocus: true
+    });
 </script>

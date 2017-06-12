@@ -5,7 +5,7 @@
 <p class="lead"><%= @document.description %></p>
 
 <% if !@document.variants.empty? %>
-  <ul class="nav nav-pills">
+  <ul class="nav nav-tabs">
   <% @variants.each do |variant| %>
     <li role="presentation" class="<%= 'active' if variant == @variant %>">
       <%= link_to variant.name, document_path(variant: variant) %>
@@ -15,23 +15,41 @@
 <% end %>
 
 <% @document.sections.each do |section| %>
-    <h2><%= section.title %> <small><%= link_to edit_section_path(section) do %>
-          <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-    <% end %></small></h2>
+    <div class="row">
+      <div class="col-md-10">
+        <h2><%= section.title %></h2>
+      </div>
+      <div class="col-md-2">
+        <%= link_to edit_section_path(section), class: 'btn btn-link' do %>
+            Edit Title
+        <% end %>
+      </div>
+    </div>
 
     <% content = @document.contents.where(section: section, variant: @variant).first %>
-    <% if content %>
-        <%= raw @markdown.render(content.try(:body)) %>
-        <%= link_to edit_content_path(content), class: 'btn btn-default btn-xs' do %>
-            Edit Content
+
+    <div class="row">
+      <div class="col-md-10">
+        <% if content %>
+          <%= raw @markdown.render(content.try(:body)) %>
+        <% else %>
+            <div class="alert alert-warning" role="alert">No content for this section yet.</div>
         <% end %>
-    <% else %>
-        <% if !@variant.nil? %>
-            <%= link_to new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-default btn-xs' do %>
-              Create Content
+      </div>
+      <div class="col-md-2">
+        <% if content %>
+          <%= link_to edit_content_path(content), class: 'btn btn-link' do %>
+              Edit Content
+          <% end %>
+        <% else %>
+            <% if !@variant.nil? %>
+                <%= link_to new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-link' do %>
+                    Add Content
+                <% end %>
             <% end %>
         <% end %>
-    <% end %>
+      </div>
+    </div>
 <% end %>
 
 <hr>

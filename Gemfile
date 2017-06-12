@@ -15,7 +15,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'redcarpet'
-gem 'bootswatch-rails'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
