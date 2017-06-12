@@ -11,24 +11,20 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.hidden_field :document_id %>
-    <%= form.hidden_field :section_id %>
-    <%= form.hidden_field :variant_id %>
-    <h2><%= @document.title %> : <%= @section.title %> : <%= @variant.name %></h2>
-  </div>
+  <%= form.hidden_field :document_id %>
+  <%= form.hidden_field :section_id %>
+  <%= form.hidden_field :variant_id %>
+  <h2><%= @document.title %> : <%= @section.title %> : <%= @variant.name %></h2>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.text_area :body, id: :content_body, rows:20, cols: 80, spellcheck: false %>
   </div>
 
-  <div class="actions">
-    <%= form.submit class: 'btn btn-primary' %>
-  </div>
+  <%= form.submit class: 'btn btn-primary' %>
 <% end %>
 
 <script>
-    var simplemde = new SimpleMDE({
+    new SimpleMDE({
         element: document.getElementById("content_body"),
         autofocus: true
     });

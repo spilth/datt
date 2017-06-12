@@ -11,17 +11,15 @@
     </div>
   <% end %>
 
-  <div class="field">
     <%= form.hidden_field :document_id %>
-    <%= @document.title %>
-  </div>
+    <h2><%= @document.title %></h2>
 
-  <div class="field">
+  <div class="form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, id: :variant_name %>
+    <%= form.text_field :name, id: :variant_name, class: 'form-control' %>
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
