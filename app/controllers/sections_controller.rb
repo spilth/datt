@@ -1,5 +1,5 @@
 class SectionsController < ApplicationController
-  before_action :set_section, only: [:show, :edit, :update, :destroy]
+  before_action :set_section, only: [:show, :edit, :update, :destroy, :move_up, :move_down]
 
   # GET /sections
   # GET /sections.json
@@ -27,6 +27,7 @@ class SectionsController < ApplicationController
   # POST /sections.json
   def create
     @section = Section.new(section_params)
+    @section.number = @section.document.sections.size + 1
 
     respond_to do |format|
       if @section.save
@@ -62,8 +63,36 @@ class SectionsController < ApplicationController
   def destroy
     @section.destroy
     respond_to do |format|
-      format.html { redirect_to sections_url, notice: 'Section was successfully destroyed.' }
+      format.html { redirect_to document_path(@section.document), notice: 'Section was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def move_up
+    if @section.number != 0
+      previous_section = @section.document.sections[@section.number - 1]
+
+      previous_section.number = @section.number
+      previous_section.save
+
+      @section.number = @section.number - 1
+      @section.save
+
+      redirect_to(@section.document)
+    end
+  end
+
+  def move_down
+    if @section.number != @section.document.sections.length - 1
+      next_section = @section.document.sections[@section.number + 1]
+
+      next_section.number = @section.number
+      next_section.save
+
+      @section.number = @section.number + 1
+      @section.save
+
+      redirect_to(@section.document)
     end
   end
 

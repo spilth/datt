@@ -14,15 +14,36 @@
   </ul>
 <% end %>
 
-<% @document.sections.each do |section| %>
+<% @document.sections.order(:number).each do |section| %>
     <div class="row">
       <div class="col-md-10">
         <h2><%= section.title %></h2>
       </div>
       <div class="col-md-2">
-        <%= link_to edit_section_path(section), class: 'btn btn-default btn-xs' do %>
-            Edit Section
-        <% end %>
+        <h2>
+          <div class="btn-group" role="group">
+            <%= link_to edit_section_path(section), class: 'btn btn-default btn-xs' do %>
+                <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
+            <% end %>
+            <% if section.number != 0 %>
+              <%= link_to move_up_section_path(section), class: 'btn btn-default btn-xs', :method => :put do %>
+                    <i class="glyphicon glyphicon-arrow-up" aria-hidden="true"></i>
+              <% end %>
+            <% else %>
+                <span class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-arrow-up" aria-hidden="true"></i></span>
+            <% end %>
+            <% if section.number != @document.sections.length - 1 %>
+              <%= link_to move_down_section_path(section), class: 'btn btn-default btn-xs', :method => :put do %>
+                    <i class="glyphicon glyphicon-arrow-down" aria-hidden="true"></i>
+              <% end %>
+            <% else %>
+                <span class="btn btn-default btn-xs disabled"><i class="glyphicon glyphicon-arrow-down" aria-hidden="true"></i></span>
+            <% end %>
+            <%= link_to section, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' do %>
+                <i class="glyphicon glyphicon-remove" aria-hidden="true"></i>
+            <% end %>
+          </div>
+        </h2>
       </div>
     </div>
 
@@ -39,12 +60,12 @@
       <div class="col-md-2">
         <% if content %>
           <%= link_to edit_content_path(content), class: 'btn btn-default btn-xs' do %>
-              Edit Content
+                <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
           <% end %>
         <% else %>
             <% if !@variant.nil? %>
                 <%= link_to new_content_path(document: @document, section: section, variant: @variant), class: 'btn btn-default btn-xs' do %>
-                    Add Content
+                    <i class="glyphicon glyphicon-edit" aria-hidden="true"></i>
                 <% end %>
             <% end %>
         <% end %>
@@ -56,17 +77,17 @@
 
 <div class="row">
   <div class="col-md-8">
-    <%= link_to 'Edit Document', edit_document_path(@document), class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Edit Document', edit_document_path(@document), class: 'btn btn-default btn-small' %>
     <% if @variant %>
-      <%= link_to 'Edit Variant', edit_variant_path(@variant), class: 'btn btn-default btn-xs' %>
+      <%= link_to 'Edit Variant', edit_variant_path(@variant), class: 'btn btn-default btn-small' %>
     <% end %>
-    <%= link_to 'Add Section', new_section_path(document: @document), class: 'btn btn-default btn-xs' %>
-    <%= link_to 'Add Variant', new_variant_path(document: @document), class: 'btn btn-default btn-xs' %>
+    <%= link_to 'Add Section', new_section_path(document: @document), class: 'btn btn-default btn-small' %>
+    <%= link_to 'Add Variant', new_variant_path(document: @document), class: 'btn btn-default btn-small' %>
   </div>
   <div class="col-md-4 pull-right">
     <% if @variant %>
-      <%= link_to 'Delete Variat', @variant, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>
+      <%= link_to 'Delete Variant', @variant, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-small' %>
     <% end %>
-    <%= link_to 'Delete Document', @document, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-xs' %>
+    <%= link_to 'Delete Document', @document, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger btn-small' %>
   </div>
 </div>
