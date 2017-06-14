@@ -30,7 +30,7 @@ class VariantsController < ApplicationController
 
     respond_to do |format|
       if @variant.save
-        format.html { redirect_to document_path(@variant.document), notice: 'Variant was successfully created.' }
+        format.html { redirect_to document_path(@variant.document, variant: @variant), notice: 'Variant was successfully created.' }
         format.json { render :show, status: :created, location: @variant }
       else
         @document = @variant.document
